@@ -2,19 +2,23 @@
 session_start();
 $_SESSION = [];
 
-$sql = "CREATE OR REPLACE TABLE HERO(
+require_once('backend/db/db.php');
+DB::createDB();
+DB::createUserTable();
+DB::createForumsTables();
+
+$sql = "CREATE TABLE IF NOT EXISTS HERO(
     hero_name varchar(255) PRIMARY KEY,
     hero_win_rate varchar(7) NOT NULL,
     hero_pick_rate varchar(7) NOT NULL,
     hero_ban_rate varchar(7) NOT NULL
 )";
 
-require_once('backend/db/db.php');
 $conn = DB::openConnection();
 
 mysqli_query($conn, $sql);
 
-$sql = "INSERT INTO HERO (hero_name, hero_win_rate, hero_pick_rate, hero_ban_rate) VALUES
+$sql = "IF NOT EXISTS (SELECT 1 FROM HERO) THEN INSERT INTO HERO (hero_name, hero_win_rate, hero_pick_rate, hero_ban_rate) VALUES
 ('Lolita', '61.24%', '0.20%', '2.17%'),
 ('Hylos', '56.56%', '0.51%', '0.53%'),
 ('Popol and Kupa', '56.46%', '0.67%', '3.84%'),
@@ -33,11 +37,12 @@ $sql = "INSERT INTO HERO (hero_name, hero_win_rate, hero_pick_rate, hero_ban_rat
 ('Khaleed', '53.40%', '0.28%', '0.16%'),
 ('Yi Sun-shin', '53.27%', '0.16%', '0.10%'),
 ('Ruby', '53.24%', '0.67%', '0.31%');
+END IF;
 ";
 
 mysqli_query($conn, $sql);
 
-$pass = password_hash('admin', PASSWORD_BCRYPT);
+$pass = password_hash('rakee', PASSWORD_BCRYPT);
 $sql = "INSERT INTO user (user_name, user_email, user_password)
             SELECT 'admin', 'admin@gmail.com', '" . $pass . "'
             WHERE NOT EXISTS (
@@ -47,9 +52,6 @@ $sql = "INSERT INTO user (user_name, user_email, user_password)
 
 mysqli_query($conn, $sql);
 
-DB::createDB();
-DB::createUserTable();
-DB::createForumsTables();
 
 header('Location: pages/login.php');
 exit();
