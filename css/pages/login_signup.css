@@ -131,7 +131,7 @@ body {
   transform: translateY(-50%);
   width: 25px;
   height: 25px;
-  background: url(../resources/form/hide.png) no-repeat center center;
+  background: url(../../resources/form/hide.png) no-repeat center center;
   background-size: contain;
   cursor: pointer;
   color: #fff;
@@ -140,7 +140,7 @@ body {
 
 /* Change the background image when the checkbox is checked */
 .input-box input[type="checkbox"]:checked + .custom-checkbox {
-  background: url(../resources/form/show.png) no-repeat center center;
+  background: url(../../resources/form/show.png) no-repeat center center;
   background-size: contain;
   filter: invert(1);
 }
