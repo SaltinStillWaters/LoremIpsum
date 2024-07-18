@@ -57,8 +57,8 @@ function displayPosts($posts, $conn)
                 echo '<i class="fas fa-ellipsis-v"></i>';
                 echo '</button>';
                 echo '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="options' . $post['id'] . '">';
-                echo '<a class="dropdown-item report-post" data-postid="' . $post['id'] . '" href="../backend/forums/report_post.php?post_id=' . $post['id'] . '">Report</a>';
-                echo '<a class="dropdown-item hide-post" data-postid="' . $post['id'] . '" href="../backend/forums/hide_post.php?post_id=' . $post['id'] . '">Hide</a>';
+                echo '<a class="dropdown-item report-post" data-postid="' . $post['id'] . '" href="#">Report</a>';
+                echo '<a class="dropdown-item hide-post" data-postid="' . $post['id'] . '" href="#">Hide</a>';
                 echo '</div>';
                 echo '</div>';
             }
